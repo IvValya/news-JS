@@ -28,7 +28,7 @@ const baseConfig = {
     },
     output: {
         filename: 'index.js',
-        path: path.resolve(__dirname, '../dist'),
+        path: path.resolve(__dirname, './dist'),
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -43,11 +43,11 @@ const baseConfig = {
             patterns: [
               { 
                 from: path.resolve(__dirname, './src/img/github.png'), 
-                to: path.resolve(__dirname, '../dist/img/') 
+                to: path.resolve(__dirname, './dist/img/') 
             },
             { 
                 from: path.resolve(__dirname, './src/img/RSS.svg'), 
-              to: path.resolve(__dirname, '../dist/img/') 
+              to: path.resolve(__dirname, './dist/img/') 
             }
         ],
     })

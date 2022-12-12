@@ -3,18 +3,18 @@ import { Source } from '../../../index';
 class Sources {
     draw(data: Source[]) {
         const fragment = document.createDocumentFragment();
-        const sourceItemTemp = document.querySelector('#sourceItemTemp') as HTMLTemplateElement;
+        const sourceItemTemp = document.querySelector<HTMLTemplateElement>('#sourceItemTemp')!;
 
         data.forEach((item) => {
             const sourceClone = sourceItemTemp.content.cloneNode(true) as HTMLElement;
 
-            (sourceClone.querySelector('.source__item-name') as HTMLSpanElement).textContent = item.name;
-            (sourceClone.querySelector('.source__item') as HTMLDivElement).setAttribute('data-source-id', item.id);
+            sourceClone.querySelector<HTMLSpanElement>('.source__item-name')!.textContent = item.name;
+            sourceClone.querySelector<HTMLDivElement>('.source__item')!.setAttribute('data-source-id', item.id);
 
             fragment.append(sourceClone);
         });
 
-        (document.querySelector('.sources') as HTMLElement).append(fragment);
+        document.querySelector<HTMLElement>('.sources')!.append(fragment);
     }
 }
 

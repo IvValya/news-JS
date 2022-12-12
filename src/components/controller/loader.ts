@@ -3,19 +3,19 @@ import { DataSources } from '../../index';
 
 //type Callback = (data?: DataNews | DataSources) => void;
 //type Callback = <T>(data?: T) => void;
-interface Callback {
-    (data?: DataNews | DataSources):void
-} ;
+interface Callback<T> {
+    (data?: T): void;
+}
 
 class Loader {
-    readonly baseLink: string;    
+    readonly baseLink: string;
     options?: object;
     constructor(baseLink: string, options?: object) {
         this.baseLink = baseLink;
         this.options = options;
     }
     getResp(
-        { endpoint, options = {} }: {endpoint: string, options?: object},
+        { endpoint, options = {} }: { endpoint: string; options?: object },
         callback = () => {
             console.error('No callback for GET response');
         }
@@ -32,15 +32,14 @@ class Loader {
     }
 
     makeUrl(options: object, endpoint: string) {
-        const urlOptions: {[index: string]: string} = { ...this.options, ...options };
-        let url: string = `${this.baseLink}${endpoint}?`;
+        const urlOptions: { [index: string]: string } = { ...this.options, ...options };
+        let url: string = `${this.baseLink}${endpoint}?` as string;
         Object.keys(urlOptions).forEach((key) => {
             url += `${key}=${urlOptions[key]}&`;
         });
         return url.slice(0, -1);
     }
-    
-    load(method: string, endpoint: string, callback: Callback, options: object) {
+    load<T>(method: string, endpoint: string, callback: Callback<T>, options: object) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
