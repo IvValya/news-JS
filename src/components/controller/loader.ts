@@ -5,7 +5,8 @@ import { DataSources } from '../../index';
 //type Callback = <T>(data?: T) => void;
 interface Callback {
     (data?: DataNews | DataSources):void
-} 
+} ;
+
 class Loader {
     readonly baseLink: string;    
     options?: object;
@@ -44,7 +45,7 @@ class Loader {
             .then(this.errorHandler)
             .then((res) => res.json())
             .then((data) => callback(data))
-            .catch((err) => console.error(err));
+            .catch((err: Response) => console.error(err));
     }
 }
 

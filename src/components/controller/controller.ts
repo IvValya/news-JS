@@ -2,12 +2,15 @@ import AppLoader from './appLoader';
 import { DataNews } from '../../index';
 import { DataSources } from '../../index';
 //type Callback = (data?: DataNews | DataSources) => void;
-interface Callback {
-    (data?: DataNews | DataSources):void
+interface CallbackN {
+    (data?: DataNews):void
+} 
+interface CallbackS {
+    (data?: DataSources):void
 } 
 
 class AppController extends AppLoader {
-    getSources(callback: Callback) {
+    getSources(callback: CallbackS) {
         super.getResp(
             {
                 endpoint: 'sources',
@@ -16,7 +19,7 @@ class AppController extends AppLoader {
         );
     }
 
-    getNews(e: Event, callback: Callback) {
+    getNews(e: Event, callback: CallbackN) {
         let target = e.target as HTMLElement;
         const newsContainer = e.currentTarget as HTMLElement;
 

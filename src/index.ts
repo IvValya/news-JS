@@ -1,7 +1,7 @@
 import App from './components/app/app';
 import './global.css';
 
-interface Articles {
+export interface Articles {
     source: {
         id: string,
         name: string
@@ -10,11 +10,11 @@ interface Articles {
     title: string,
     description: string,
     url: string,
-    urlTImage: string,
+    urlToImage: string,
     publishedAt: string,
     content: string
 }
-interface Source {
+export interface Source {
     id: string,
     name: string,
     description: string,
