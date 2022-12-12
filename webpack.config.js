@@ -3,12 +3,17 @@ const { merge } = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const EslingPlugin = require('eslint-webpack-plugin');
+const CopyWebpackIcon = require("copy-webpack-plugin");
 
 const baseConfig = {
     entry: path.resolve(__dirname, './src/index'),
     mode: 'development',
     module: {
         rules: [
+            {
+                test: /\.(png|jpg|gif|svg|mp3)$/,
+                type: 'asset/resource'
+            },
             {
                 test: /\.css$/i,
                 use: ['style-loader', 'css-loader'],
@@ -23,7 +28,7 @@ const baseConfig = {
     },
     output: {
         filename: 'index.js',
-        path: path.resolve(__dirname, './dist'),
+        path: path.resolve(__dirname, '../dist'),
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -34,6 +39,18 @@ const baseConfig = {
         new EslingPlugin({ 
             extensions: 'ts' 
         }),
+        new CopyWebpackIcon({
+            patterns: [
+              { 
+                from: path.resolve(__dirname, './src/img/github.png'), 
+                to: path.resolve(__dirname, '../dist/img/') 
+            },
+            { 
+                from: path.resolve(__dirname, './src/img/RSS.svg'), 
+              to: path.resolve(__dirname, '../dist/img/') 
+            }
+        ],
+    })
     ],
 };
 
